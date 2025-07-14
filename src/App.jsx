@@ -7,6 +7,7 @@ function App() {
   const [comics, setComics] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [count, setCount] = useState(0);
 
   const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const second_key = import.meta.env.VITE_APP_PRIVATE_KEY;
@@ -52,12 +53,43 @@ function App() {
     }
   }
 
+  const displayedComics = (filteredResults.length > 0 ? filteredResults : comics)
+  .filter((comic) =>
+    !comic.thumbnail.path.includes("image_not_available") &&
+    comic.prices[0].price !== 0
+  );
+
+  const averagePrice = displayedComics.length > 0
+    ? (displayedComics.reduce((sum, comic) =>
+      sum + comic.prices[0].price, 0) / displayedComics.length).toFixed(2)
+    : 0;
+
+  const mostPopular = displayedComics.length > 0
+    ? (displayedComics.reduce((prev, current) => {
+        const prevIssue = parseInt(prev.issueNumber) || 0;
+        const currentIssue = parseInt(current.issueNumber) || 0;
+        return prevIssue > currentIssue ? prev : current;
+    }))
+    : null;
+
+
   return (
     <>
       <div>
         <h1>Marvel Comics</h1>
         <div className="statistics">
-
+          <div className="comics-statistic">
+            <span className="stat-label">Comics Displayed</span>
+            <span className="stat-number">{displayedComics.length}</span>
+          </div>
+          <div className="comics-statistic">
+            <span className="stat-label">Average Price</span>
+            <span className="stat-number">${averagePrice}</span>
+          </div>
+          <div className="comics-statistic">
+            <span className="stat-label">Highest Issue</span>
+            <span className="stat-number">{mostPopular ? mostPopular.title : 'N/A'}</span>
+          </div>
         </div>
         <div className="list-block">
           <div className="search">
@@ -68,12 +100,9 @@ function App() {
             />
           </div>
           <ul>
-            {(filteredResults.length > 0 ? filteredResults : comics)
-            .filter((comic) =>
-              !comic.thumbnail.path.includes("image_not_available") &&
-              comic.prices[0].price !== 0
-            )
+            {displayedComics
             .map((comic) => {
+              
               return (
                 <Comic
                   key={comic.id}

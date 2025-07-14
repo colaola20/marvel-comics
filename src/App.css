@@ -35,8 +35,16 @@ h1 {
   50% { background-position: 100% 50%; }
 }
 
+.statistics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
 /* Main container */
-.list-block {
+.list-block, .statistics {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-radius: 20px;
@@ -85,8 +93,86 @@ ul {
   padding: 0;
 }
 
+.comics-statistic {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated gradient border */
+.comics-statistic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4ecdc4, #ff6b6b, #45b7d1, #4ecdc4);
+  background-size: 200% 100%;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Hover effects */
+.comics-statistic:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(78, 205, 196, 0.4);
+}
+
+/* Different colors for each card */
+.comics-statistic:nth-child(1):hover {
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+.comics-statistic:nth-child(2):hover {
+  border-color: rgba(78, 205, 196, 0.4);
+}
+
+.comics-statistic:nth-child(3):hover {
+  border-color: rgba(255, 193, 7, 0.4);
+}
+
+/* Typography */
+.comics-statistic h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .statistics {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .comics-statistic {
+    padding: 1.5rem 1rem;
+  }
+  
+  .comics-statistic h2 {
+    font-size: 1rem;
+  }
+}
+
 /* Individual comic card - List Layout */
-.main-list {
+.main-list, .comics-statistic {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   border-radius: 16px;
   padding: 1.5rem;
