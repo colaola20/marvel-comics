@@ -5,8 +5,8 @@ import Comic from "/Users/olha/vscode101/WEB102/data-dashboard/dataDashboard/Com
 
 function App() {
   const [comics, setComics] = useState([]);
-  const [filteredResults, setFilteredREsults] = useState([]);
-  const [serchInput, setSearchInput] = useState("");
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const second_key = import.meta.env.VITE_APP_PRIVATE_KEY;
@@ -37,31 +37,43 @@ function App() {
     fetchComics();
   }, []);
 
-  // const searchItems = searchValue => {
-  //   setSearchInput(searchValue)
-  //   if 
-  // }
+  const searchItems = searchValue => {
+    setSearchInput(searchValue);
+    
+    if (searchValue !== "") {
+      const filteredData = comics.filter((comic) =>
+        comic.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        comic.series?.name?.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setFilteredResults(filteredData); // Use the actual filtered data
+    } else {
+      // If search is empty, show all comics
+      setFilteredResults([]);
+    }
+  }
 
   return (
     <>
       <div>
         <h1>Marvel Comics</h1>
+        <div className="statistics">
+
+        </div>
         <div className="list-block">
           <div className="search">
             <input
               type="text"
-              placeholder="Search..."
-              onChange={(inputString) => searchItems(inputString.target.vaalue)}
+              placeholder="Search comics by title or series..."
+              onChange={(inputString) => searchItems(inputString.target.value)}
             />
           </div>
           <ul>
-            {comics && comics
+            {(filteredResults.length > 0 ? filteredResults : comics)
             .filter((comic) =>
               !comic.thumbnail.path.includes("image_not_available") &&
-              comic.prices[0].price != 0
+              comic.prices[0].price !== 0
             )
             .map((comic) => {
-              console.log(comic.dates[0].date);
               return (
                 <Comic
                   key={comic.id}
