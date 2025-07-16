@@ -7,7 +7,7 @@ function App() {
   const [comics, setComics] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [count, setCount] = useState(0);
+  const [priceRange, setPriceRange] = useState([0, 50]);
 
   const API_KEY = import.meta.env.VITE_APP_API_KEY;
   const second_key = import.meta.env.VITE_APP_PRIVATE_KEY;
@@ -53,11 +53,23 @@ function App() {
     }
   }
 
-  const displayedComics = (filteredResults.length > 0 ? filteredResults : comics)
-  .filter((comic) =>
-    !comic.thumbnail.path.includes("image_not_available") &&
-    comic.prices[0].price !== 0
-  );
+  const filterByPrice = (comics, priceRange) => {
+    return comics.filter(comic => {
+      const price = comic.prices[0].price;
+      return price >= priceRange[0] && price <= priceRange[1];
+    });
+  };
+
+  const displayedComics = (() => {
+    let comicsToFilter = filteredResults.length > 0 ? filteredResults : comics;
+    comicsToFilter = filterByPrice(comicsToFilter, priceRange);
+
+    return comicsToFilter
+      .filter((comic) =>
+      !comic.thumbnail.path.includes("image_not_available") &&
+      comic.prices[0].price !== 0
+    );
+  })();
 
   const averagePrice = displayedComics.length > 0
     ? (displayedComics.reduce((sum, comic) =>
@@ -71,6 +83,18 @@ function App() {
         return prevIssue > currentIssue ? prev : current;
     }))
     : null;
+
+  // Get min and max prices from all comics for range bounds
+  const priceExtents = comics.length > 0 ? (() => {
+    const prices = comics
+      .filter(comic => comic.prices[0]?.price > 0)
+      .map(comic => comic.prices[0].price);
+    return {
+      min: Math.floor(Math.min(...prices)),
+      max: Math.ceil(Math.max(...prices)) 
+    };
+  })() : { min: 0, max: 50 };
+
 
 
   return (
@@ -98,6 +122,29 @@ function App() {
               placeholder="Search comics by title or series..."
               onChange={(inputString) => searchItems(inputString.target.value)}
             />
+            <div className="price-range-container">
+              <label>Price: ${priceRange[0]} - ${priceRange[1]}</label>
+              
+              <div className="simple-dual-range">
+                <input
+                  type="range"
+                  min={priceExtents.min}
+                  max={priceExtents.max}
+                  value={priceRange[0]}
+                  onChange={(e) => setPriceRange([Math.min(Number(e.target.value), priceRange[1] - 1), priceRange[1]])}
+                  className="thumb thumb-left"
+                />
+                <input
+                  type="range"
+                  min={priceExtents.min}
+                  max={priceExtents.max}
+                  value={priceRange[1]}
+                  onChange={(e) => setPriceRange([priceRange[0], Math.max(Number(e.target.value), priceRange[0] + 1)])}
+                  className="thumb thumb-right"
+                />
+              </div>
+            </div>
+          
           </div>
           <ul>
             {displayedComics

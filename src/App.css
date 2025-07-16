@@ -209,6 +209,211 @@ ul {
   border-color: rgba(78, 205, 196, 0.5);
 }
 
+
+/* Price Range Container */
+.price-range-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 280px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-range-container label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Simple Dual Range Slider */
+.simple-dual-range {
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb {
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: none;
+}
+
+/* Remove default track styling */
+.thumb::-webkit-slider-track {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.2);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.thumb::-moz-range-track {
+  background: rgba(255, 255, 255, 0.2);
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+}
+
+/* Style the thumbs */
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+.thumb::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+  transition: all 0.2s ease;
+}
+
+/* Different colors for left and right thumbs */
+.thumb-left::-webkit-slider-thumb {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  z-index: 2;
+}
+
+.thumb-left::-moz-range-thumb {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+}
+
+.thumb-right::-webkit-slider-thumb {
+  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+  z-index: 1;
+}
+
+.thumb-right::-moz-range-thumb {
+  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+}
+
+/* Hover effects */
+.thumb::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.thumb::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Active state */
+.thumb::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Add a subtle background track */
+.simple-dual-range::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  z-index: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .price-range-container {
+    min-width: 250px;
+    padding: 0.8rem;
+  }
+  
+  .thumb::-webkit-slider-thumb {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .thumb::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .simple-dual-range {
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .price-range-container {
+    min-width: 200px;
+  }
+  
+  .price-range-container label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Search container adjustment */
+.search {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.search input[type="text"] {
+  flex: 1;
+  max-width: 400px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search input[type="text"]:focus {
+  border-color: #4ecdc4;
+  box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+  transform: scale(1.02);
+}
+
+/* Mobile responsive for search */
+@media (max-width: 768px) {
+  .search {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .search input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
 /* Comic image - List Layout */
 .comicImg {
   width: 120px;
@@ -278,6 +483,16 @@ ul {
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Add skeleton loading for comics */
+.comic-skeleton {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0.1) 25%, 
+    rgba(255,255,255,0.2) 50%, 
+    rgba(255,255,255,0.1) 75%
+  );
+  animation: skeleton-loading 1.5s infinite;
 }
 
 /* Responsive design */
