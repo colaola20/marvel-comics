@@ -118,7 +118,7 @@ function App() {
         <div className="list-block">
           <div className="search">
             <input
-              type="text"
+              type="search"
               placeholder="Search comics by title or series..."
               onChange={(inputString) => searchItems(inputString.target.value)}
             />
