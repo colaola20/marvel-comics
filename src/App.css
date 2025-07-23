@@ -282,6 +282,12 @@ h1::after {
 
 /* Enhanced Chart Container */
 .comic-chart-container {
+  display:flex;
+  direction: row;
+  gap: 3rem;
+  padding: 1.5rem;
+  max-width: 100%;
+  max-height: 350px;
   margin: 2rem 0;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.06);

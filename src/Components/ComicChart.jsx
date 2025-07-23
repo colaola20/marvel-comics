@@ -98,9 +98,10 @@ const ComicChart = () => {
     };
   };
 
+
   return (
     <div className="comic-chart-container">
-        <Bar data={getPriceDistribution()} options={chartOptions} />;
+        <Bar data={getPriceDistribution()} options={chartOptions} />
         <Bar data={getTopSeries()} options={{...chartOptions, indexAxis: 'y'}} />
     </div>
   );

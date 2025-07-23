@@ -137,9 +137,10 @@ function App() {
                 />
               </div>
             </div>
-            <ComicChart />
+            
           
           </div>
+          <ComicChart />
           <ul>
             {displayedComics
             .map((comic) => {
