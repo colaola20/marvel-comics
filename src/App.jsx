@@ -2,41 +2,33 @@ import { useState, useEffect } from 'react';
 import md5 from "md5";
 import './App.css';
 import Comic from "/Users/olha/vscode101/WEB102/data-dashboard/dataDashboard/Components/Comic.jsx";
+import { useComics } from './ComicsContext.jsx';
 
 function App() {
-  const [comics, setComics] = useState([]);
+  const { comics, loading, error } = useComics();
+
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [priceRange, setPriceRange] = useState([0, 50]);
 
-  const API_KEY = import.meta.env.VITE_APP_API_KEY;
-  const second_key = import.meta.env.VITE_APP_PRIVATE_KEY;
-  useEffect(() => {
-    const fetchComics = async () => {
+  if (loading) {
+    return (
+      <div>
+        <h1>Marvel Comics</h1>
+        <div>Loading comics...</div>
+      </div>
+    );
+  }
 
-      const ts = Date.now().toString();
-      const hash = md5(ts + second_key + API_KEY);
-      
-      const url = `https://gateway.marvel.com/v1/public/comics?ts=${ts}&apikey=${API_KEY}&hash=${hash}&limit=40`;
-      
-      try {
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error("API Error:", errorText);
-          return;
-        }
-        
-        const data = await response.json();
-        setComics(data.data.results);
-        console.log("Comics data:", data.data.results);
-      } catch (err) {
-        console.error("Error fetching comics:", err);
-      }
-    };
-    fetchComics();
-  }, []);
+    // Show error state
+  if (error) {
+    return (
+      <div>
+        <h1>Marvel Comics</h1>
+        <div>Error loading comics: {error}</div>
+      </div>
+    );
+  }
 
   const searchItems = searchValue => {
     setSearchInput(searchValue);
