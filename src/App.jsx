@@ -3,6 +3,7 @@ import md5 from "md5";
 import './App.css';
 import Comic from "./Components/Comic.jsx";
 import { useComics } from './ComicsContext.jsx';
+import ComicChart from "./Components/ComicChart.jsx"
 
 function App() {
   const { comics, loading, error } = useComics();
@@ -136,6 +137,7 @@ function App() {
                 />
               </div>
             </div>
+            <ComicChart />
           
           </div>
           <ul>
