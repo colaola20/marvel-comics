@@ -4,20 +4,20 @@ Submitted by: Olha Sorych
 
 This web app: a modern web application built with React and Vite that showcases Marvel Comics data through the official Marvel API. The app features a sleek, dark-themed interface with glass morphism design elements, displaying comics in an elegant list view with cover images, titles, prices, and release dates. Users can browse through a curated selection of Marvel comics with beautiful hover animations and responsive design that works seamlessly across desktop and mobile devices. The dashboard filters out comics without images and free issues to provide a premium browsing experience for Marvel fans and collectors.
 
-Time spent: _ hours spent in total
+Time spent: 5 hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [ ] **Clicking on an item in the list view displays more details about it**
+- [x] **Clicking on an item in the list view displays more details about it**
   - Clicking on an item in the dashboard list navigates to a detail view for that item
   - Detail view includes extra information about the item not included in the dashboard view
   - The same sidebar is displayed in detail view as in dashboard view
   - *To ensure an accurate grade, your sidebar **must** be viewable when showing the details view in your recording.*
-- [ ] **Each detail view of an item has a direct, unique URL link to that item’s detail view page**
+- [x] **Each detail view of an item has a direct, unique URL link to that item’s detail view page**
   -  *To ensure an accurate grade, the URL/address bar of your web browser **must** be viewable in your recording.*
-- [ ] **The app includes at least two unique charts developed using the fetched data that tell an interesting story**
+- [x] **The app includes at least two unique charts developed using the fetched data that tell an interesting story**
   - At least two charts should be incorporated into the dashboard view of the site
   - Each chart should describe a different aspect of the dataset
 
@@ -38,7 +38,11 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+https://github.com/user-attachments/assets/4f9e0aaa-6a48-4a15-aa2d-522a63b0b14a
+
+
+
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
