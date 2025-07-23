@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import md5 from "md5";
 import './App.css';
-import Comic from "/Users/olha/vscode101/WEB102/data-dashboard/dataDashboard/Components/Comic.jsx";
+import Comic from "./Components/Comic.jsx";
 import { useComics } from './ComicsContext.jsx';
 
 function App() {
